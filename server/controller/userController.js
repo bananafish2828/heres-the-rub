@@ -4,7 +4,7 @@ const userController = {
   indexOfUsers: (req, res) => {
     User
       .find({})
-      .exec(function(err, users) {
+      .exec((err, users) => {
         if (err) return console.log(err);
         res.json({ success: true, message: 'all users', users: users });
       })
@@ -12,7 +12,7 @@ const userController = {
 
   createUser: (req, res) => {
     var newUser = new User(req.body);
-    newUser.save(function(err, user) {
+    newUser.save((err, user) => {
       if (!user) return res.json({ success: false, message: 'user already exists' });
       if (err) return console.log(err);
       res.json({ success: true, message: 'user successfully created', user: user });
@@ -22,7 +22,7 @@ const userController = {
   findUser: (req, res) => {
     User
       .findOne({ _id: req.params.id })
-      .exec(function(err, user) {
+      .exec((err, user) => {
         if (err) return console.log(err);
         res.json({ success: true, message: 'user found', user: user });
       })      
@@ -32,7 +32,7 @@ const userController = {
     console.log('req.params.id:', req.params.id)
     User
       .findOne({ _id: req.params.id })
-      .exec(function(err, user) {
+      .exec((err, user) => {
         if (err) return console.log(err);
         if (req.body.email) {
           user.email = req.body.email;
@@ -40,7 +40,7 @@ const userController = {
         if (req.body.photoURL) {
           user.photoURL = req.body.photoURL;
         }
-        user.save(function(err, user) {
+        user.save((err, user) => {
           if (err) return console.log(err);
           res.json({ success: true, message: 'user info updated', user: user });
         })
@@ -49,12 +49,11 @@ const userController = {
 
   deleteUser: (req, res) => {
     User
-      .findOneAndRemove({ _id: req.params.id }, function(err) {
+      .findOneAndRemove({ _id: req.params.id }, (err) => {
         if (err) return console.log(err);
         res.json({ success: true, message: 'user successfully deleted' });
       })
   }
-
 }
 
 module.exports = userController;

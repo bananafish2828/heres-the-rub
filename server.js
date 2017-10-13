@@ -8,6 +8,7 @@ const dotenv = require('dotenv').config();
 const cors = require('cors');
 
 const userRouter = require('./server/router/userRouter.js');
+const itineraryRouter = require('./server/router/itineraryRouter.js');
 
 const app = express();
 
@@ -30,7 +31,10 @@ app.use((req, res, next) => {
   }
 })
 
-app.use('/users/', userRouter);
+app.use('/users', userRouter);
+app.use('/itinerary', itineraryRouter);
+
+app.use(express.static(path.join(__dirname, './public')));
 
 mongoose.connect(process.env.DB_URL, function(err) {
   if (err) {
