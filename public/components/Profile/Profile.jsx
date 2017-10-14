@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import UserName from './UserName/UserName.jsx'; 
+
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -8,7 +10,7 @@ export default class Profile extends Component {
 render() {
   return (
     <div>
-      <li>username component goes here</li>
+      <UserName />
       <li>email component goes here</li>
       <li>photo component goes here</li>
       <li>itinerary component goes here</li>
