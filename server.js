@@ -35,6 +35,9 @@ app.use('/users', userRouter);
 app.use('/itinerary', itineraryRouter);
 
 app.use(express.static(path.join(__dirname, './public')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+})
 
 mongoose.connect(process.env.DB_URL, function(err) {
   if (err) {
