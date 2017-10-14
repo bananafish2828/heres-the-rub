@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-const DisplayUserName = () => {
+const DisplayUserName = ({ handleNameClick, userName }) => {
 
   return (
     <div>
-      UserName goes here
+      <span onClick={() => { handleNameClick() }}>{ userName }</span>
     </div>
   )
 }

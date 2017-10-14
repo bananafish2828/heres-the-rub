@@ -11,6 +11,28 @@ export default class UserName extends Component {
     this.state = {
       displayUserName: true,
       userName: ''
+    };
+    this.handleEdit=this.handleEdit.bind(this);
+    this.handleSubmit=this.handleSubmit.bind(this);
+  };
+
+  componentWillReceiveProps(NextProps) {
+    this.setState({ displayUserName: true, userName: NextProps.userName });
+  };
+
+  handleEdit() {
+    this.setState({ displayUserName: false });
+  }
+
+  handleSubmit(nameSubmission) {
+    console.log('userNameSubmitted', nameSubmission)
+    if (nameSubmission !== undefined && nameSubmission !== '') {
+      axios.put('/users/' + this.props.user_id, { userName: nameSubmission })
+      .then(() => {
+        this.setState({ displayUserName: true, userName: nameSubmission });
+      })
+    } else {
+      this.setState({ displayUserName: true, userName: this.state.userName });
     }
   }
 
@@ -18,9 +40,9 @@ export default class UserName extends Component {
     return (
       <div>{
         (this.state.displayUserName) ? (
-          <DisplayUserName />
+          <DisplayUserName handleNameClick={ this.handleEdit } userName={ this.state.userName }/>
         ) : (
-          <QueryUserName />
+          <QueryUserName handleSubmit={ this.handleSubmit } />
         )
       }</div>
     )

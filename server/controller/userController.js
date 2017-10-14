@@ -34,6 +34,9 @@ const userController = {
       .findOne({ _id: req.params.id })
       .exec((err, user) => {
         if (err) return console.log(err);
+        if (req.body.userName) {
+          user.userName = req.body.userName;
+        }
         if (req.body.email) {
           user.email = req.body.email;
         }

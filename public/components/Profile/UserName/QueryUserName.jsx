@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 
-const QueryUserName = () => {
-
+const QueryUserName = ({ handleSubmit }) => {
+  let text;
   return (
     <div>
-      UserName Textfield goes here
+      <span>
+        Name: <input type='text' onChange={(e) => text = e.target.value }/>
+        <button onClick={() => { handleSubmit(text) }}>Submit</button>
+        <button onClick={() => { handleSubmit() }}>Cancel</button>
+      </span>
     </div>
   )
 }
